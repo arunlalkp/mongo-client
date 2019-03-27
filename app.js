@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan')
 const db = require('mongodb')
+const path = require('path')
 const bodyParser = require('body-parser')
 const MongoClient = db.MongoClient
 
@@ -22,6 +23,9 @@ app.use(morgan('tiny'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routers/indexRouter'))
 app.use('/user', require('./routers/userRouter'))
