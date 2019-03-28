@@ -1,16 +1,17 @@
 const express = require('express');
 const morgan = require('morgan')
-const db = require('mongodb')
 const path = require('path')
 const bodyParser = require('body-parser')
-const MongoClient = db.MongoClient
 
-MongoClient.connect('mongodb://localhost:27017/mongoClient', {useNewUrlParser: true} , (err, dbase)=> {
-    if(err) console.log(err);
-    else console.log(`Mongodb Connected.. on  ${dbase.s.url}`);    
-} )
+const db = require('./models/db')
 
-
+db.connect('mongodb://localhost:27017/mongoClient', (err)=> {
+    if (err) {
+        throw err
+        process.exit(1)
+    }
+    console.log('MonngoDB Connected');
+})
 
 
 
