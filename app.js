@@ -5,15 +5,13 @@ const bodyParser = require('body-parser')
 
 const db = require('./models/db')
 
-db.connect('mongodb://localhost:27017/mongoClient', (err)=> {
+db.connect('mongodb://localhost:27017', (err)=> {
     if (err) {
-        throw err
+        console.log(err);
         process.exit(1)
     }
     console.log('MonngoDB Connected');
 })
-
-
 
 
 const app = express();

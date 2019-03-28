@@ -8,14 +8,19 @@ var state = {
 exports.connect = (url, done)=> {
   if (state.db) return done()
 
-  MongoClient.connect(url, {useNewUrlParser: true} , (err, db)=> {
+  MongoClient.connect(url, {useNewUrlParser: true} , (err, client)=> {
     if (err) return done(err)
-    state.db = db
+
+    // Set Database Name
+    let dbName = 'mongoClient'
+
+    // Store Database to state.db variable so we can return that variable with get() method.
+    state.db = client.db(dbName)
     done()
   })
 }
 
-// Get connection state
+// Return Database Obj
 exports.get = ()=> {
   return state.db
 }
